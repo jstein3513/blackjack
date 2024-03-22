@@ -14,40 +14,29 @@ button {
 }
 
 .card {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    display: inline-block;
     margin: 5px;
     padding: 10px;
     background-color: #fff;
-    border-radius: 8px;
-    border: 2px solid #000;
-    box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
-    width: 80px;
-    height: 120px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    width: 60px;
+    height: 100px;
     position: relative;
-    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
     color: black;
-    font-size: 20px;
 }
 
-.card::before, .card::after {
-    content: attr(data-value) " " attr(data-suit);
+.card .suit {
     position: absolute;
-}
-
-.card::before {
     top: 5px;
     left: 5px;
-    font-size: 18px;
 }
 
-.card::after {
+.card .value {
+    position: absolute;
     bottom: 5px;
     right: 5px;
-    font-size: 18px;
-    transform: rotate(180deg);
 }
 
 .card.hearts, .card.diamonds {
