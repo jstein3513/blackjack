@@ -5,9 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const dealerCardsDiv = document.getElementById('dealerCards');
     const playerCardsDiv = document.getElementById('playerCards');
     const gameStatusDiv = document.getElementById('gameStatus');
-    const gameArea = document.getElementById('gameArea'); // Make sure this is correctly referenced
     const dealerActionDiv = document.createElement('div');
-    dealerActionDiv.setAttribute('id', 'dealerAction'); // Set an ID for styling or reference
+    dealerActionDiv.setAttribute('id', 'dealerAction');
 
     let playerCards = [], dealerCards = [], deck = [];
     let inGame = false, playerTurnOver = false;
@@ -27,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function shuffleDeck(deck) {
         for (let i = deck.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [deck[i], deck[j]] = [deck[j], deck[i]]; // Swap
+            [deck[i], deck[j]] = [deck[j], deck[i]];
         }
     }
 
@@ -39,21 +38,20 @@ document.addEventListener('DOMContentLoaded', () => {
         inGame = true;
         playerTurnOver = false;
         updateGameArea();
-        dealerActionDiv.textContent = ''; // Reset dealer actions
-        gameStatusDiv.textContent = ''; // Clear previous game status
+        dealerActionDiv.textContent = '';
+        gameStatusDiv.textContent = '';
     }
 
     function hit() {
         if (!inGame || playerTurnOver) return;
         playerCards.push(deck.pop());
-        let playerScore = calculateScore(playerCards);
-        updateGameArea();
+        const playerScore = calculateScore(playerCards);
         if (playerScore > 21) {
-            gameStatusDiv.textContent = `Bust! Your score: ${playerScore}`; // Show 'Bust' next to the player's score
+            gameStatusDiv.textContent = `Bust! Your score: ${playerScore}`;
             playerTurnOver = true; // Player busts
-            setTimeout(() => {
-                dealerPlay(); // Delay the dealer's turn to simulate real play
-            }, 1000); // Wait 1 second before starting dealer's turn
+            setTimeout(stand, 1000); // Delay dealer's turn to simulate real-time play
+        } else {
+            updateGameArea();
         }
     }
 
@@ -63,35 +61,16 @@ document.addEventListener('DOMContentLoaded', () => {
         dealerPlay(); // Process dealer's turn
     }
 
-    function dealerPlay() {
+    async function dealerPlay() {
         let actionTaken = false;
-        while (calculateScore(dealerCards) < 17) {
+        let dealerScore = calculateScore(dealerCards);
+        while (dealerScore < 17) {
+            await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second between actions for dramatic effect
             dealerCards.push(deck.pop());
-            actionTaken = true; // Indicates dealer took a hit
+            dealerScore = calculateScore(dealerCards);
+            updateGameArea(); // Update UI with each new card
+            actionTaken = true;
         }
-
-              function dealerDrawCard() {
-            if (calculateScore(dealerCards) < 17) {
-                dealerCards.push(deck.pop());
-                updateDealerAreaWithDelay(); // Update dealer's hand with a delay
-            } else {
-                endGame(); // End the game if dealer decides to stand
-            }
-        }
-
-        function updateDealerAreaWithDelay() {
-            updateGameArea(); // Update the game area with current state
-            dealerActionDiv.textContent = 'Dealer Hits'; // Update action text
-            if (calculateScore(dealerCards) >= 17) {
-                dealerActionDiv.textContent = 'Dealer Stands';
-                setTimeout(endGame, 1000); // Wait before showing the game's outcome
-            } else {
-                setTimeout(dealerDrawCard, 1000); // Continue drawing cards with a delay
-            }
-        }
-
-        dealerDrawCard(); // Start dealer's card drawing process
-    }
         
         dealerActionDiv.textContent = actionTaken ? 'Dealer Hits' : 'Dealer Stands';
         endGame();
@@ -102,13 +81,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const playerScore = calculateScore(playerCards);
         const dealerScore = calculateScore(dealerCards);
         if (playerScore > 21) {
-            gameStatusDiv.textContent = 'You bust! Dealer wins.';
+            gameStatusDiv.textContent += ' You bust! Dealer wins.';
         } else if (dealerScore > 21 || playerScore > dealerScore) {
-            gameStatusDiv.textContent = 'You win!';
+            gameStatusDiv.textContent += ' You win!';
         } else if (dealerScore > playerScore) {
-            gameStatusDiv.textContent = 'Dealer wins.';
+            gameStatusDiv.textContent += ' Dealer wins.';
         } else {
-            gameStatusDiv.textContent = 'Draw!';
+            gameStatusDiv.textContent += ' Draw!';
         }
         updateGameArea();
     }
@@ -144,17 +123,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Display the game area and scores only if the game has started or if it's the player's turn
         gameArea.style.display = inGame || playerTurnOver ? 'block' : 'none';
-        if (!inGame) {
-            // Show final scores when the game ends
-            gameStatusDiv.textContent += ` Your score: ${calculateScore(playerCards)}, Dealer's score: ${calculateScore(dealerCards)}`;
-        } else {
+        if (!inGame && !playerTurnOver) {
+            // Update to reflect bust condition more accurately
+            if (calculateScore(playerCards) > 21) {
+                gameStatusDiv.textContent = `Bust! Your score: ${calculateScore(playerCards)}`;
+            } else {
+                // Show final scores when the game ends
+                gameStatusDiv.textContent += ` Your score: ${calculateScore(playerCards)}, Dealer's score: ${calculateScore(dealerCards)}`;
+            }
+        } else if (inGame) {
             // Show only the player's score during the game
             gameStatusDiv.textContent = `Your score: ${calculateScore(playerCards)}`;
         }
     }
-
+    
     startGameButton.addEventListener('click', startGame);
     hitButton.addEventListener('click', hit);
     standButton.addEventListener('click', stand);
 });
-
