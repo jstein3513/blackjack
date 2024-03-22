@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dealerCardsDiv = document.getElementById('dealerCards');
     const playerCardsDiv = document.getElementById('playerCards');
     const gameStatusDiv = document.getElementById('gameStatus');
-    let dealerActionDiv = document.createElement('div'); // For displaying dealer actions
+    const dealerActionDiv = document.createElement('div'); // Added to display dealer's actions
 
     let playerCards = [], dealerCards = [], deck = [];
     let inGame = false;
@@ -34,9 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
         shuffleDeck(deck);
         dealerCards = [deck.pop(), deck.pop()];
         playerCards = [deck.pop(), deck.pop()];
-        dealerActionDiv.innerHTML = ''; // Reset dealer actions display
         inGame = true;
         updateGameArea();
+        dealerActionDiv.textContent = ''; // Reset dealer actions
     }
 
     function hit() {
@@ -50,17 +50,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function stand() {
         if (!inGame) return;
-        inGame = false; // End player's turn
-
-        let dealerScore = calculateScore(dealerCards);
-        while (dealerScore < 17) {
-            let card = deck.pop();
-            dealerCards.push(card);
-            dealerScore = calculateScore(dealerCards);
-            dealerActionDiv.innerHTML += `<div>Dealer hits: ${card.value} of ${card.suit}</div>`; // Show dealer hit
+        inGame = false; // Player ends turn, dealer's actions start
+        
+        // Dealer's turn logic
+        let actionTaken = false;
+        while (calculateScore(dealerCards) < 17) {
+            dealerCards.push(deck.pop());
+            actionTaken = true; // Indicates dealer took a hit
         }
-        if (dealerScore >= 17) {
-            dealerActionDiv.innerHTML += `<div>Dealer stands.</div>`; // Show dealer stands
+        
+        if (actionTaken) {
+            dealerActionDiv.textContent = 'Dealer Hits';
+        } else {
+            dealerActionDiv.textContent = 'Dealer Stands';
         }
 
         endGame();
@@ -69,19 +71,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function endGame() {
         const playerScore = calculateScore(playerCards);
         const dealerScore = calculateScore(dealerCards);
-        let resultMessage;
-        
-        if (playerScore > 21) {
-            resultMessage = 'You bust! Dealer wins.';
+        if (playerScore > 21 || (dealerScore <= 21 && dealerScore > playerScore)) {
+            gameStatusDiv.textContent = 'You lose!';
         } else if (dealerScore > 21 || playerScore > dealerScore) {
-            resultMessage = 'You win!';
-        } else if (dealerScore > playerScore) {
-            resultMessage = 'Dealer wins.';
+            gameStatusDiv.textContent = 'You win!';
         } else {
-            resultMessage = 'It\'s a draw!';
+            gameStatusDiv.textContent = 'Draw!';
         }
-        
-        gameStatusDiv.textContent = resultMessage;
         updateGameArea();
     }
 
@@ -98,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 score += parseInt(card.value);
             }
         }
-
+        
         while (score > 21 && aceCount > 0) {
             score -= 10;
             aceCount -= 1;
@@ -116,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dealerCardsDiv.innerHTML = dealerCards.map(card => `<div class="card">${card.value} of ${card.suit}</div>`).join('');
         playerCardsDiv.innerHTML = playerCards.map(card => `<div class="card">${card.value} of ${card.suit}</div>`).join('');
         gameStatusDiv.textContent = `Your score: ${calculateScore(playerCards)}`;
-        dealerCardsDiv.appendChild(dealerActionDiv);
+        dealerCardsDiv.appendChild(dealerActionDiv); // Display dealer's action
     }
 
     startGameButton.addEventListener('click', startGame);
