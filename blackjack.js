@@ -7,6 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameStatusDiv = document.getElementById('gameStatus');
     const dealerActionDiv = document.createElement('div');
     dealerActionDiv.setAttribute('id', 'dealerAction');
+    const splitButton = document.getElementById('split');
+    let splitCards = []; // To store split hand cards
+    let isSplit = false; // Flag to check if a split occurred
+    let activeHand = 'player'; // To track which hand is currently in play ('player' or 'split')
+
 
     let playerCards = [], dealerCards = [], deck = [];
     let inGame = false, playerTurnOver = false;
@@ -40,22 +45,34 @@ document.addEventListener('DOMContentLoaded', () => {
         updateGameArea();
         dealerActionDiv.textContent = '';
         gameStatusDiv.textContent = '';
+        splitButton.style.display = canSplit(playerCards) ? 'inline' : 'none'; // Show split button if possible
+
+    }
+
+    function canSplit(cards) {
+        return cards.length === 2 && cards[0].value === cards[1].value;
     }
 
     function hit() {
         if (!inGame || playerTurnOver) return;
-        playerCards.push(deck.pop());
-        const playerScore = calculateScore(playerCards);
-        if (playerScore > 21) {
-            gameStatusDiv.textContent = `Bust! Your score: ${playerScore}`;
-            playerTurnOver = true; // Player busts
-            setTimeout(stand, 1000); // Delay dealer's turn to simulate real-time play
+        let targetCards = activeHand === 'player' ? playerCards : splitCards;
+        targetCards.push(deck.pop());
+        const score = calculateScore(targetCards);
+        if (score > 21) {
+            if (activeHand === 'split') {
+                playerTurnOver = true; // End turn if on split hand
+                stand();
+            } else if (isSplit) {
+                activeHand = 'split'; // Move to split hand if player busts
+                updateGameArea();
+            } else {
+                playerTurnOver = true; // Player busts without a split hand
+                setTimeout(stand, 1000);
+            }
         } else {
             updateGameArea();
         }
-    }
-
-    function stand() {
+    }    function stand() {
         if (!inGame || playerTurnOver) return;
         playerTurnOver = true; // Player ends turn
         dealerPlay(); // Process dealer's turn
@@ -77,6 +94,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function endGame() {
+
+        if (activeHand === 'player' && isSplit) {
+            activeHand = 'split';
+            playerTurnOver = false; // Allow playing the split hand
+            updateGameArea();
+            return; // Exit without setting inGame to false to allow playing the split hand
+        }
+
         inGame = false;
         const playerScore = calculateScore(playerCards);
         const dealerScore = calculateScore(dealerCards);
@@ -117,6 +142,22 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateGameArea() {
         dealerCardsDiv.innerHTML = dealerCards.map(card => `<div class="card">${card.value} of ${card.suit}</div>`).join('');
         playerCardsDiv.innerHTML = playerCards.map(card => `<div class="card">${card.value} of ${card.suit}</div>`).join('');
+
+        if (isSplit) {
+            playerCardsDiv.innerHTML += ' (Split Hand)'; // Indicate the split hand
+            playerCardsDiv.innerHTML += splitCards.map(card => `<div class="card">${card.value} of ${card.suit}</div>`).join('');
+        }
+
+        splitButton.style.display = activeHand === 'player' && canSplit(playerCards) ? 'inline' : 'none';
+    splitButton.addEventListener('click', () => {
+        if (canSplit(playerCards)) {
+            isSplit = true;
+            splitCards.push(playerCards.pop()); // Move one card to the split hand
+            playerCards.push(deck.pop()); // Draw new cards for each hand
+            splitCards.push(deck.pop());
+            updateGameArea();
+        }
+    });
 
         // Append the dealer's action text to the dealer's area
         dealerCardsDiv.appendChild(dealerActionDiv);
