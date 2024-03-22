@@ -46,11 +46,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function hit() {
         if (!inGame || playerTurnOver) return;
         playerCards.push(deck.pop());
-        if (calculateScore(playerCards) > 21) {
-            playerTurnOver = true; // Player busts
-            stand(); // Move to dealer's turn
-        }
+        let playerScore = calculateScore(playerCards);
         updateGameArea();
+        if (playerScore > 21) {
+            gameStatusDiv.textContent = `Bust! Your score: ${playerScore}`; // Show 'Bust' next to the player's score
+            playerTurnOver = true; // Player busts
+            setTimeout(() => {
+                dealerPlay(); // Delay the dealer's turn to simulate real play
+            }, 1000); // Wait 1 second before starting dealer's turn
+        }
     }
 
     function stand() {
@@ -65,6 +69,29 @@ document.addEventListener('DOMContentLoaded', () => {
             dealerCards.push(deck.pop());
             actionTaken = true; // Indicates dealer took a hit
         }
+
+              function dealerDrawCard() {
+            if (calculateScore(dealerCards) < 17) {
+                dealerCards.push(deck.pop());
+                updateDealerAreaWithDelay(); // Update dealer's hand with a delay
+            } else {
+                endGame(); // End the game if dealer decides to stand
+            }
+        }
+
+        function updateDealerAreaWithDelay() {
+            updateGameArea(); // Update the game area with current state
+            dealerActionDiv.textContent = 'Dealer Hits'; // Update action text
+            if (calculateScore(dealerCards) >= 17) {
+                dealerActionDiv.textContent = 'Dealer Stands';
+                setTimeout(endGame, 1000); // Wait before showing the game's outcome
+            } else {
+                setTimeout(dealerDrawCard, 1000); // Continue drawing cards with a delay
+            }
+        }
+
+        dealerDrawCard(); // Start dealer's card drawing process
+    }
         
         dealerActionDiv.textContent = actionTaken ? 'Dealer Hits' : 'Dealer Stands';
         endGame();
