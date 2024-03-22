@@ -129,8 +129,8 @@ function updateGameArea() {
 function createCardElement(card) {
     const cardDiv = document.createElement('div');
     cardDiv.classList.add('card', card.suit.toLowerCase());
-    const suitSymbol = getSuitSymbol(card.suit);
-    cardDiv.innerHTML = `<span class="suit">${suitSymbol}</span><span class="value">${card.value}</span>`;
+    cardDiv.setAttribute('data-value', card.value);
+    cardDiv.setAttribute('data-suit', getSuitSymbol(card.suit));
     return cardDiv;
 }
 
@@ -143,6 +143,7 @@ function getSuitSymbol(suit) {
         default: return '';
     }
 }
+
     
         // Append the dealer's action text to the dealer's area
         dealerCardsDiv.appendChild(dealerActionDiv);
