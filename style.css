@@ -20,6 +20,27 @@ button {
     background-color: #fff;
     border-radius: 10px;
     border: 1px solid #000;
+    width: 60px;
+    height: 100px;
+    position: relative;
+    font-size: 18px;
+    color: black;
+}
+
+.card .suit {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.card .value {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.card.hearts, .card.diamonds {
+    color: red;
 }
 
 #gameStatus {
