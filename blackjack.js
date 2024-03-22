@@ -114,10 +114,36 @@ document.addEventListener('DOMContentLoaded', () => {
         return score;
     }
 
-    function updateGameArea() {
-        dealerCardsDiv.innerHTML = dealerCards.map(card => `<div class="card">${card.value} of ${card.suit}</div>`).join('');
-        playerCardsDiv.innerHTML = playerCards.map(card => `<div class="card">${card.value} of ${card.suit}</div>`).join('');
+function updateGameArea() {
+    dealerCardsDiv.innerHTML = '';
+    playerCardsDiv.innerHTML = '';
 
+    dealerCards.forEach(card => {
+        dealerCardsDiv.appendChild(createCardElement(card));
+    });
+
+    playerCards.forEach(card => {
+        playerCardsDiv.appendChild(createCardElement(card));
+    });
+
+function createCardElement(card) {
+    const cardDiv = document.createElement('div');
+    cardDiv.classList.add('card', card.suit.toLowerCase());
+    const suitSymbol = getSuitSymbol(card.suit);
+    cardDiv.innerHTML = `<span class="suit">${suitSymbol}</span><span class="value">${card.value}</span>`;
+    return cardDiv;
+}
+
+function getSuitSymbol(suit) {
+    switch (suit) {
+        case 'Hearts': return '♥';
+        case 'Diamonds': return '♦';
+        case 'Clubs': return '♣';
+        case 'Spades': return '♠';
+        default: return '';
+    }
+}
+    
         // Append the dealer's action text to the dealer's area
         dealerCardsDiv.appendChild(dealerActionDiv);
 
