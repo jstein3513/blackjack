@@ -2,19 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const startGameButton = document.getElementById('startGame');
     const hitButton = document.getElementById('hit');
     const standButton = document.getElementById('stand');
+    const splitButton = document.getElementById('split');
     const dealerCardsDiv = document.getElementById('dealerCards');
     const playerCardsDiv = document.getElementById('playerCards');
     const gameStatusDiv = document.getElementById('gameStatus');
-    const dealerActionDiv = document.createElement('div');
-    dealerActionDiv.setAttribute('id', 'dealerAction');
-    const splitButton = document.getElementById('split');
-    let splitCards = []; // To store split hand cards
-    let isSplit = false; // Flag to check if a split occurred
-    let activeHand = 'player'; // To track which hand is currently in play ('player' or 'split')
-
-
-    let playerCards = [], dealerCards = [], deck = [];
-    let inGame = false, playerTurnOver = false;
+    let playerHands = [[]], dealerCards = [], deck = [];
+    let inGame = false, currentPlayerHandIndex = 0;
 
     function createDeck() {
         const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
@@ -39,14 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
         deck = createDeck();
         shuffleDeck(deck);
         dealerCards = [deck.pop(), deck.pop()];
-        playerCards = [deck.pop(), deck.pop()];
+        playerHands = [[deck.pop(), deck.pop()]];
         inGame = true;
-        playerTurnOver = false;
+        currentPlayerHandIndex = 0;
         updateGameArea();
-        dealerActionDiv.textContent = '';
-        gameStatusDiv.textContent = '';
-        splitButton.style.display = canSplit(playerCards) ? 'inline' : 'none'; // Show split button if possible
-
+        checkForSplit();
     }
 
     function canSplit(cards) {
@@ -54,25 +44,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function hit() {
-        if (!inGame || playerTurnOver) return;
-        let targetCards = activeHand === 'player' ? playerCards : splitCards;
-        targetCards.push(deck.pop());
-        const score = calculateScore(targetCards);
-        if (score > 21) {
-            if (activeHand === 'split') {
-                playerTurnOver = true; // End turn if on split hand
-                stand();
-            } else if (isSplit) {
-                activeHand = 'split'; // Move to split hand if player busts
-                updateGameArea();
-            } else {
-                playerTurnOver = true; // Player busts without a split hand
-                setTimeout(stand, 1000);
-            }
-        } else {
-            updateGameArea();
+        if (!inGame) return;
+        let currentHand = playerHands[currentPlayerHandIndex];
+        currentHand.push(deck.pop());
+        if (calculateScore(currentHand) > 21) {
+            moveToNextHandOrEndGame();
         }
-    }    function stand() {
+        updateGameArea();
+    }
+
+    function split() {
+        if (canSplit(playerHands[currentPlayerHandIndex])) {
+            let currentHand = playerHands[currentPlayerHandIndex];
+            let cardToSplit = currentHand.pop();
+            playerHands.push([cardToSplit, deck.pop()]);
+            currentHand.push(deck.pop());
+            updateGameArea();
+            checkForSplit(); // Check if the new hand can be split again
+        }
+    }
+
+    function moveToNextHandOrEndGame() {
+        currentPlayerHandIndex++;
+        if (currentPlayerHandIndex >= playerHands.length) {
+            endPlayerTurn();
+        } else {
+            updateGameArea(); // Update to show the next hand
+            checkForSplit(); // Check if the new hand can be split
+        }
+    }
+
+    // Checks if the current hand can be split
+    function checkForSplit() {
+        let currentHand = playerHands[currentPlayerHandIndex];
+        splitButton.style.display = canSplit(currentHand) ? 'inline' : 'none';
+    }
+
+    // Determines if a hand can be split
+    function canSplit(hand) {
+        return hand.length === 2 && hand[0].value === hand[1].value;
+    }
+
+
+function stand() {
         if (!inGame || playerTurnOver) return;
         playerTurnOver = true; // Player ends turn
         dealerPlay(); // Process dealer's turn
@@ -141,23 +155,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateGameArea() {
         dealerCardsDiv.innerHTML = dealerCards.map(card => `<div class="card">${card.value} of ${card.suit}</div>`).join('');
-        playerCardsDiv.innerHTML = playerCards.map(card => `<div class="card">${card.value} of ${card.suit}</div>`).join('');
+        playerCardsDiv.innerHTML = '';
+        playerHands.forEach((hand, index) => {
+            let handDiv = document.createElement('div');
+            handDiv.classList.add('hand');
+            handDiv.innerHTML = hand.map(card => `<div class="card">${card.value} of ${card.suit}</div>`).join('');
+            if (index === currentPlayerHandIndex) {
+                let actionButtonsDiv = document.createElement('div');
+                actionButtonsDiv.appendChild(hitButton);
+                actionButtonsDiv.appendChild(standButton);
+                actionButtonsDiv.appendChild(splitButton);
+                handDiv.appendChild(actionButtonsDiv);
+            }
+            playerCardsDiv.appendChild(handDiv);
+        });
+    }
 
-        if (isSplit) {
-            playerCardsDiv.innerHTML += ' (Split Hand)'; // Indicate the split hand
-            playerCardsDiv.innerHTML += splitCards.map(card => `<div class="card">${card.value} of ${card.suit}</div>`).join('');
-        }
-
-        splitButton.style.display = activeHand === 'player' && canSplit(playerCards) ? 'inline' : 'none';
-    splitButton.addEventListener('click', () => {
-        if (canSplit(playerCards)) {
-            isSplit = true;
-            splitCards.push(playerCards.pop()); // Move one card to the split hand
-            playerCards.push(deck.pop()); // Draw new cards for each hand
-            splitCards.push(deck.pop());
-            updateGameArea();
-        }
-    });
+    startGameButton.addEventListener('click', startGame);
+    hitButton.addEventListener('click', hit);
+    standButton.addEventListener('click', () => moveToNextHandOrEndGame());
+    splitButton.addEventListener('click', split);
+});
 
         // Append the dealer's action text to the dealer's area
         dealerCardsDiv.appendChild(dealerActionDiv);
