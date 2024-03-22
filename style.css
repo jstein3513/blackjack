@@ -12,3 +12,18 @@ button {
     margin: 10px;
     padding: 10px;
 }
+
+.card {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #000;
+}
+
+#gameStatus {
+    margin-top: 20px;
+    font-size: 24px;
+    color: green;
+}
