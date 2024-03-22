@@ -129,8 +129,8 @@ function updateGameArea() {
 function createCardElement(card) {
     const cardDiv = document.createElement('div');
     cardDiv.classList.add('card', card.suit.toLowerCase());
-    cardDiv.setAttribute('data-value', card.value);
-    cardDiv.setAttribute('data-suit', getSuitSymbol(card.suit));
+    const suitSymbol = getSuitSymbol(card.suit);
+    cardDiv.innerHTML = `<span class="suit">${suitSymbol}</span><span class="value">${card.value}</span>`;
     return cardDiv;
 }
 
