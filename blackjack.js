@@ -37,6 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
         playerCards = [deck.pop(), deck.pop()];
         inGame = true;
         playerTurnOver = false;
+        document.getElementById('dealerHeader').classList.remove('hidden');
+        document.getElementById('playerHeader').classList.remove('hidden');
         updateGameArea();
         dealerActionDiv.textContent = '';
         gameStatusDiv.textContent = '';
@@ -89,6 +91,14 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             gameStatusDiv.textContent += ' Draw!';
         }
+
+            if (dealerCards.length > 0) {
+        const firstDealerCardDiv = dealerCardsDiv.firstChild;
+        firstDealerCardDiv.classList.remove('back');
+        firstDealerCardDiv.textContent = ''; // Clear the '?'
+        const firstCard = dealerCards[0];
+        firstDealerCardDiv.appendChild(createCardElement(firstCard, false));
+    }
         updateGameArea();
     }
 
@@ -118,19 +128,27 @@ function updateGameArea() {
     dealerCardsDiv.innerHTML = '';
     playerCardsDiv.innerHTML = '';
 
-    dealerCards.forEach(card => {
-        dealerCardsDiv.appendChild(createCardElement(card));
+    
+
+    dealerCards.forEach((card, index) => {
+        dealerCardsDiv.appendChild(createCardElement(card, index === 0 && inGame));
     });
 
     playerCards.forEach(card => {
-        playerCardsDiv.appendChild(createCardElement(card));
+        playerCardsDiv.appendChild(createCardElement(card, false));
     });
 
-function createCardElement(card) {
+function createCardElement(card, isHidden) {
     const cardDiv = document.createElement('div');
     cardDiv.classList.add('card', card.suit.toLowerCase());
-    const suitSymbol = getSuitSymbol(card.suit);
-    cardDiv.innerHTML = `<span class="suit">${suitSymbol}</span><span class="value">${card.value}</span>`;
+    if (!isHidden) {
+        const suitSymbol = getSuitSymbol(card.suit);
+        cardDiv.innerHTML = `<span class="suit">${suitSymbol}</span><span class="value">${card.value}</span>`;
+    } else {
+        // If the card should be hidden, add the 'back' class and a placeholder
+        cardDiv.classList.add('back');
+        cardDiv.textContent = '?';
+    }
     return cardDiv;
 }
 
