@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
             actionTaken = true;
         }
         
-        dealerActionDiv.textContent = actionTaken ? 'Dealer Hits' : 'Dealer Stands';
+        //dealerActionDiv.textContent = actionTaken ? 'Dealer Hits' : 'Dealer Stands';
         endGame();
     }
 
