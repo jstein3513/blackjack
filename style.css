@@ -100,3 +100,27 @@ h1, h2 {
     align-items: flex-start;
     margin-top: 20px;
 }
+
+/* Add media query for mobile devices */
+@media screen and (max-width: 600px) { /* Adjust the max-width as needed */
+    .container {
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+    button {
+        width: 80px; /* Adjust button width for better touch interaction */
+    }
+    #gameArea {
+        font-size: 14px; /* Adjust font size for smaller screens */
+    }
+    .card {
+        width: 40px; /* Adjust card width for smaller screens */
+        height: 70px; /* Adjust card height for smaller screens */
+    }
+    .card .suit {
+        font-size: 14px; /* Adjust font size for suit symbol */
+    }
+    .card .value {
+        font-size: 14px; /* Adjust font size for card value */
+    }
+}
+
