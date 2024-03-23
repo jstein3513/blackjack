@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dealerCardsDiv = document.getElementById('dealerCards');
     const playerCardsDiv = document.getElementById('playerCards');
     const gameStatusDiv = document.getElementById('gameStatus');
+    const gameArea = document.getElementById('gameArea');
     const dealerActionDiv = document.createElement('div');
     dealerActionDiv.setAttribute('id', 'dealerAction');
 
@@ -92,16 +93,16 @@ document.addEventListener('DOMContentLoaded', () => {
             gameStatusDiv.textContent += ' Draw!';
         }
 
+        // Reveal dealer's hidden card
+        if (dealerCards.length > 0) {
+            const firstDealerCardDiv = dealerCardsDiv.firstChild;
+            firstDealerCardDiv.classList.remove('back');
+            firstDealerCardDiv.textContent = ''; // Clear the '?'
+            const firstCard = dealerCards[0];
+            firstDealerCardDiv.appendChild(createCardElement(firstCard, false));
+        }
 
         updateGameArea();
-
-                    if (dealerCards.length > 0) {
-        const firstDealerCardDiv = dealerCardsDiv.firstChild;
-        firstDealerCardDiv.classList.remove('back');
-        firstDealerCardDiv.textContent = ''; // Clear the '?'
-        const firstCard = dealerCards[0];
-        firstDealerCardDiv.appendChild(createCardElement(firstCard, false));
-    }
     }
 
     function calculateScore(cards) {
@@ -126,45 +127,18 @@ document.addEventListener('DOMContentLoaded', () => {
         return score;
     }
 
-function updateGameArea() {
-    dealerCardsDiv.innerHTML = '';
-    playerCardsDiv.innerHTML = '';
+    function updateGameArea() {
+        dealerCardsDiv.innerHTML = '';
+        playerCardsDiv.innerHTML = '';
 
-    
+        dealerCards.forEach((card, index) => {
+            dealerCardsDiv.appendChild(createCardElement(card, index === 0 && inGame));
+        });
 
-    dealerCards.forEach((card, index) => {
-        dealerCardsDiv.appendChild(createCardElement(card, index === 0 && inGame));
-    });
+        playerCards.forEach(card => {
+            playerCardsDiv.appendChild(createCardElement(card, false));
+        });
 
-    playerCards.forEach(card => {
-        playerCardsDiv.appendChild(createCardElement(card, false));
-    });
-
-function createCardElement(card, isHidden) {
-    const cardDiv = document.createElement('div');
-    cardDiv.classList.add('card', card.suit.toLowerCase());
-    if (!isHidden) {
-        const suitSymbol = getSuitSymbol(card.suit);
-        cardDiv.innerHTML = `<span class="suit">${suitSymbol}</span><span class="value">${card.value}</span>`;
-    } else {
-        // If the card should be hidden, add the 'back' class and a placeholder
-        cardDiv.classList.add('back');
-        cardDiv.textContent = '?';
-    }
-    return cardDiv;
-}
-
-function getSuitSymbol(suit) {
-    switch (suit) {
-        case 'Hearts': return '♥';
-        case 'Diamonds': return '♦';
-        case 'Clubs': return '♣';
-        case 'Spades': return '♠';
-        default: return '';
-    }
-}
-
-    
         // Append the dealer's action text to the dealer's area
         dealerCardsDiv.appendChild(dealerActionDiv);
 
@@ -178,9 +152,33 @@ function getSuitSymbol(suit) {
                 // Show final scores when the game ends
                 gameStatusDiv.textContent += ` Your score: ${calculateScore(playerCards)}, Dealer's score: ${calculateScore(dealerCards)}`;
             }
-        } else if (inGame) {
+} else if (inGame) {
             // Show only the player's score during the game
             gameStatusDiv.textContent = `Your score: ${calculateScore(playerCards)}`;
+        }
+    }
+
+    function createCardElement(card, isHidden) {
+        const cardDiv = document.createElement('div');
+        cardDiv.classList.add('card', card.suit.toLowerCase());
+        if (!isHidden) {
+            const suitSymbol = getSuitSymbol(card.suit);
+            cardDiv.innerHTML = `<span class="suit">${suitSymbol}</span><span class="value">${card.value}</span>`;
+        } else {
+            // If the card should be hidden, add the 'back' class and a placeholder
+            cardDiv.classList.add('back');
+            cardDiv.textContent = '?';
+        }
+        return cardDiv;
+    }
+
+    function getSuitSymbol(suit) {
+        switch (suit) {
+            case 'Hearts': return '♥';
+            case 'Diamonds': return '♦';
+            case 'Clubs': return '♣';
+            case 'Spades': return '♠';
+            default: return '';
         }
     }
     
@@ -188,3 +186,4 @@ function getSuitSymbol(suit) {
     hitButton.addEventListener('click', hit);
     standButton.addEventListener('click', stand);
 });
+            // Show only the player's score during the
