@@ -87,11 +87,9 @@ h1, h2 {
     display: none;
 }
 
-.facedown-card {
-    background-color: #333; /* Dark background for facedown card */
-    color: #333; /* Text color same as background to 'hide' it */
-}
-
-.revealed {
-    display: block;
+.card .back {
+    background-color: blue;
+    color: white;
+    text-align: center;
+    line-height: 100px; /* Center the '?' vertically */
 }
