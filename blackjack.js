@@ -82,6 +82,16 @@ document.addEventListener('DOMContentLoaded', () => {
         inGame = false;
         const playerScore = calculateScore(playerCards);
         const dealerScore = calculateScore(dealerCards);
+
+            if (dealerCards.length > 0) {
+        const firstDealerCardDiv = dealerCardsDiv.firstChild;
+        firstDealerCardDiv.classList.remove('back');
+        firstDealerCardDiv.textContent = ''; // Clear the '?'
+        const firstCard = dealerCards[0];
+        firstDealerCardDiv.appendChild(createCardElement(firstCard, false));
+    }
+
+        
         if (playerScore > 21) {
             gameStatusDiv.textContent += ' You bust! Dealer wins.';
         } else if (dealerScore > 21 || playerScore > dealerScore) {
@@ -92,13 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
             gameStatusDiv.textContent += ' Draw!';
         }
 
-            if (dealerCards.length > 0) {
-        const firstDealerCardDiv = dealerCardsDiv.firstChild;
-        firstDealerCardDiv.classList.remove('back');
-        firstDealerCardDiv.textContent = ''; // Clear the '?'
-        const firstCard = dealerCards[0];
-        firstDealerCardDiv.appendChild(createCardElement(firstCard, false));
-    }
+
         updateGameArea();
     }
 
