@@ -82,3 +82,16 @@ button:hover {
 h1, h2 {
     color: white; /* This will make all h1 and h2 headers white */
 }
+
+.hidden {
+    display: none;
+}
+
+.facedown-card {
+    background-color: #333; /* Dark background for facedown card */
+    color: #333; /* Text color same as background to 'hide' it */
+}
+
+.revealed {
+    display: block;
+}
