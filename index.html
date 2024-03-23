@@ -2,24 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Add viewport meta tag for responsive design -->
     <title>Simple Blackjack Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Blackjack</h1>
-    <button id="startGame">Start Game</button>
-    <button id="hit">Hit</button>
-    <button id="stand">Stand</button>
-    <div id="gameArea" class="container">
-        <div id="dealerArea">
-            <h2 id="dealerHeader" class="hidden">Dealer's Hand</h2>
-            <div id="dealerCards"></div>
+    <div class="container"> <!-- Wrap the entire content in a container for better mobile layout -->
+        <h1>Blackjack</h1>
+        <button id="startGame">Start Game</button>
+        <button id="hit">Hit</button>
+        <button id="stand">Stand</button>
+        <div id="gameArea">
+            <div id="dealerArea">
+                <h2 id="dealerHeader" class="hidden">Dealer's Hand</h2>
+                <div id="dealerCards"></div>
+            </div>
+            <div id="playerArea">
+                <h2 id="playerHeader" class="hidden">Your Hand</h2>
+                <div id="playerCards"></div>
+            </div>
+            <div id="gameStatus"></div>
         </div>
-        <div id="playerArea">
-            <h2 id="playerHeader" class="hidden">Your Hand</h2>
-            <div id="playerCards"></div>
-        </div>
-        <div id="gameStatus"></div>
     </div>
     <script src="blackjack.js"></script>
 </body>
