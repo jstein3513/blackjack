@@ -93,3 +93,10 @@ h1, h2 {
     text-align: center;
     line-height: 100px; /* Center the '?' vertically */
 }
+
+#dealerCards {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 20px;
+}
