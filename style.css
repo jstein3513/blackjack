@@ -122,11 +122,13 @@ h1, h2 {
     .card .value {
         font-size: 14px; /* Adjust font size for card value */
     }
-}
-
-.button-container {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    .button-container {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex; /* Set display to flex */
+        justify-content: center; /* Center the buttons horizontally */
+        gap: 10px; /* Add spacing between buttons */
+    }
 }
