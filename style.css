@@ -1,16 +1,32 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    margin-top: 20px;
+    margin: 0;
+    padding: 0;
+    background-color: #1a661a; /* Base green color */
+    background-image: 
+        radial-gradient(circle, #1c6b1c 1px, transparent 1px),
+        radial-gradient(circle, #177517 1px, transparent 1px);
+    background-size: 2px 2px; /* Size of the speckles */
+    background-position: 0 0, 4px 4px;
 }
 
-#gameArea {
-    display: none;
-}
+
 
 button {
     margin: 10px;
     padding: 10px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+   width: 100px;
+}
+
+button:hover {
+    background-color: #e0e0e0;
 }
 
 .card {
@@ -25,6 +41,7 @@ button {
     position: relative;
     font-size: 18px;
     color: black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .card .suit {
@@ -46,5 +63,22 @@ button {
 #gameStatus {
     margin-top: 20px;
     font-size: 24px;
-    color: green;
+    color: #fff;
+}
+
+/* Additional styles to center the game area */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+.header {
+    padding-top: 40px;
+    padding-bottom: 15px;
+}
+
+h1, h2 {
+    color: white; /* This will make all h1 and h2 headers white */
 }
