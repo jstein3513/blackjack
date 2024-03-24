@@ -44,6 +44,7 @@ button:hover {
     font-size: 18px;
     color: black;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s ease; /* Add transition for fluid motion */
 }
 
 .card .suit {
@@ -126,7 +127,7 @@ h1, h2 {
     }
     .button-container {
         position: absolute;
-        bottom: 100px;
+        bottom: 70px;
         left: 50%;
         transform: translateX(-50%);
         display: flex; /* Set display to flex */
