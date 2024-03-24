@@ -1,86 +1,134 @@
-@import url(https://fonts.googleapis.com/css?family=Lora:400,700);
-$base: 50px;
 body {
-  padding: 10px 0 0 10px;
-}
-header {
-  font-family: Lora;
-  font-weight: 400;
-  padding: 1em 0 2em;
-  h1 {
-    font-weight: 700;
-    font-size: 2em;
-  }
-  p {
-    margin: 1em 0 0;
-  }
-  [code] {
-    padding: 5px 10px;
-    background: #eee;
-    box-shadow: 0 0 0 1px #ddd;
-    display: inline-block;
-    color: crimson;
-  }
-}
-card {
-  font-family: Lora, serif;
-  font-weight: 700;
-  float: left;
-  margin: 0 10px 10px 0;
-  width: $base * 3;
-  height: $base * 4;
-  background: linear-gradient(left top, white, #f0f0f0);
-  border-radius: $base * 0.1;
-  box-shadow: 2px 2px 6px rgba(black, 0.2),
-    inset 0 0 0 1px rgba(black, 0.2);
-  position: relative;
-  &.red {
-    color: crimson;
-  }
-  corner {
-    position: absolute;
+    font-family: Arial, sans-serif;
     text-align: center;
-    &.top { top: 10px; }
-    &.left { left: 10px; }
-    &.bottom { bottom: 10px; }
-    &.right { right: 10px; }
-    h1 {
-      font-size: 1.5em;
+    margin: 0;
+    padding: 0;
+    background-color: #1a661a; /* Base green color */
+    background-image: 
+        radial-gradient(circle, #1c6b1c 1px, transparent 1px),
+        radial-gradient(circle, #177517 1px, transparent 1px);
+    background-size: 2px 2px; /* Size of the speckles */
+    background-position: 0 0, 4px 4px;
+}
+
+
+
+button {
+    margin: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+   width: 100px;
+}
+
+button:hover {
+    background-color: #e0e0e0;
+}
+
+.card {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #000;
+    width: 60px;
+    height: 100px;
+    position: relative;
+    font-size: 18px;
+    color: black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card .suit {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.card .value {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.card.hearts, .card.diamonds {
+    color: red;
+}
+
+#gameStatus {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #fff;
+}
+
+/* Additional styles to center the game area */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+.header {
+    padding-top: 40px;
+    padding-bottom: 15px;
+}
+
+h1, h2 {
+    color: white; /* This will make all h1 and h2 headers white */
+}
+
+.hidden {
+    display: none;
+}
+
+.card .back {
+    background-color: blue;
+    color: white;
+    text-align: center;
+    line-height: 100px; /* Center the '?' vertically */
+}
+
+#dealerCards {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+/* Add media query for mobile devices */
+@media screen and (max-width: 600px) { /* Adjust the max-width as needed */
+    .container {
+        padding: 10px; /* Adjust padding for smaller screens */
     }
-    pip {
-      font-size: 1.3em;
+    button {
+        width: 80px; /* Adjust button width for better touch interaction */
     }
-    &:last-of-type {
-      transform: rotate(180deg);
+    #gameArea {
+        font-size: 14px; /* Adjust font size for smaller screens */
     }
-  }
-  pip {
-    font-family: serif;
-    &.clubs:before { content: '\02663'; }
-    &.hearts:before { content: '\02665'; }
-    &.spades:before { content: '\02660'; }
-    &.diamonds:before { content: '\02666'; }
-  }
-  pips {
-    pip {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      font-size: 2.3em;
-      &.flip {
-        transform: translate(-50%, -50%) rotate(180deg);
-      }
+    .card {
+        width: 40px; /* Adjust card width for smaller screens */
+        height: 70px; /* Adjust card height for smaller screens */
     }
-    h1 {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 4em;
-      border-width: 1px;
-      border-style: solid;
-      text-align: center;
-      line-height: $base * 2.5;
-      width: $base * 1.5;
+    .card .suit {
+        font-size: 14px; /* Adjust font size for suit symbol */
     }
-  }
+    .card .value {
+        font-size: 14px; /* Adjust font size for card value */
+    }
+    .button-container {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex; /* Set display to flex */
+        justify-content: center; /* Center the buttons horizontally */
+        gap: 10px; /* Add spacing between buttons */
+    }
 }
