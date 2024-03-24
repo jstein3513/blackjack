@@ -20,7 +20,7 @@ button {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: all 0.3s ease;
-    width: 100px;
+    width: 120px;
     font-weight: 600; /* Make the text bold */
     color: black; /* Set text color to black */
     font-size: 14px; /* Set the font size to 16 pixels (adjust as needed) */
@@ -126,7 +126,7 @@ h1, h2 {
     }
     .button-container {
         position: absolute;
-        bottom: 50px;
+        bottom: 100px;
         left: 50%;
         transform: translateX(-50%);
         display: flex; /* Set display to flex */
