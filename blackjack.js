@@ -45,18 +45,22 @@ document.addEventListener('DOMContentLoaded', () => {
         gameStatusDiv.textContent = '';
     }
 
-    function hit() {
-        if (!inGame || playerTurnOver) return;
-        playerCards.push(deck.pop());
-        const playerScore = calculateScore(playerCards);
-        if (playerScore > 21) {
-            gameStatusDiv.textContent = `Bust! Your score: ${playerScore}`;
-            playerTurnOver = true; // Player busts
-            setTimeout(stand, 1000); // Delay dealer's turn to simulate real-time play
-        } else {
-            updateGameArea();
-        }
+function hit() {
+    if (!inGame || playerTurnOver) return;
+    playerCards.push(deck.pop());
+    const playerScore = calculateScore(playerCards);
+    if (playerScore > 21) {
+        gameStatusDiv.textContent = `Bust! Your score: ${playerScore}`;
+        playerTurnOver = true; // Player busts
+        setTimeout(() => {
+            stand();
+            updateGameArea(); // Update UI after checking bust condition
+        }, 100); // Delay dealer's turn to simulate real-time play
+    } else {
+        updateGameArea(); // Update UI if player has not busted
     }
+}
+
 
     function stand() {
         if (!inGame || playerTurnOver) return;
@@ -68,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let actionTaken = false;
         let dealerScore = calculateScore(dealerCards);
         while (dealerScore < 17) {
-            await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second between actions for dramatic effect
+            await new Promise(resolve => setTimeout(resolve, 100)); // Wait 1 second between actions for dramatic effect
             dealerCards.push(deck.pop());
             dealerScore = calculateScore(dealerCards);
             updateGameArea(); // Update UI with each new card
