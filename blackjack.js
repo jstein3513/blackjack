@@ -49,18 +49,18 @@ function hit() {
     if (!inGame || playerTurnOver) return;
     playerCards.push(deck.pop());
     const playerScore = calculateScore(playerCards);
+    updateGameArea(); // Update UI to show the latest card
+
     if (playerScore > 21) {
-        gameStatusDiv.textContent = `Bust! Your score: ${playerScore}`;
-        playerTurnOver = true; // Player busts
         setTimeout(() => {
-            stand();
-            updateGameArea(); // Update UI after checking bust condition
-        }, 100); // Delay dealer's turn to simulate real-time play
-    } else {
-        updateGameArea(); // Update UI if player has not busted
+            gameStatusDiv.textContent = 'Bust!'; // Display bust message after a short delay
+            setTimeout(() => {
+                playerTurnOver = true; // Player busts
+                stand(); // Proceed with the end of the player's turn
+            }, 1000); // Delay before ending the player's turn
+        }, 500); // Short delay before displaying the bust message
     }
 }
-
 
     function stand() {
         if (!inGame || playerTurnOver) return;
