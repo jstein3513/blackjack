@@ -38,13 +38,13 @@ button:hover {
     background-color: #fff;
     border-radius: 12px;
     border: 1px solid #000;
-    width: 72px;
-    height: 120px;
+    width: 60px;
+    height: 100px;
     position: relative;
     font-size: 18px;
     color: black;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: all 0.5s ease; /* Add transition for fluid motion */
+    //transition: all 0.5s ease; /* Add transition for fluid motion */
 }
 
 .card .suit {
@@ -116,8 +116,8 @@ h1, h2 {
         font-size: 14px; /* Adjust font size for smaller screens */
     }
     .card {
-        width: 60px; /* Adjust card width for smaller screens */
-        height: 105px; /* Adjust card height for smaller screens */
+        width: 50px; /* Adjust card width for smaller screens */
+        height: 88px; /* Adjust card height for smaller screens */
     }
     .card .suit {
         font-size: 14px; /* Adjust font size for suit symbol */
