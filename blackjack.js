@@ -149,16 +149,14 @@ function hit() {
         // Display the game area and scores only if the game has started or if it's the player's turn
         gameArea.style.display = inGame || playerTurnOver ? 'block' : 'none';
         if (!inGame && !playerTurnOver) {
-            // Update to reflect bust condition more accurately
             if (calculateScore(playerCards) > 21) {
-                gameStatusDiv.textContent = `Bust! Your score: ${calculateScore(playerCards)}`;
+                //gameStatusDiv.textContent = `Bust! Your score: ${calculateScore(playerCards)}`;
             } else {
-                // Show final scores when the game ends
-                gameStatusDiv.textContent += ` Your score: ${calculateScore(playerCards)}, Dealer's score: ${calculateScore(dealerCards)}`;
+                //gameStatusDiv.textContent += ` Your score: ${calculateScore(playerCards)}, Dealer's score: ${calculateScore(dealerCards)}`;
             }
 } else if (inGame) {
             // Show only the player's score during the game
-            gameStatusDiv.textContent = `Your score: ${calculateScore(playerCards)}`;
+            //gameStatusDiv.textContent = `Your score: ${calculateScore(playerCards)}`;
         }
     }
 
