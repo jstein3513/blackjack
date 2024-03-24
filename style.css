@@ -124,7 +124,7 @@ h1, h2 {
     }
     .button-container {
         position: absolute;
-        bottom: 0;
+        bottom: 50px;
         left: 50%;
         transform: translateX(-50%);
         display: flex; /* Set display to flex */
