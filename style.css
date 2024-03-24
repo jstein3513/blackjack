@@ -44,7 +44,7 @@ button:hover {
     font-size: 18px;
     color: black;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    //transition: all 0.5s ease; /* Add transition for fluid motion */
+    transition: all 0.5s ease; /* Add transition for fluid motion */
 }
 
 .card .suit {
