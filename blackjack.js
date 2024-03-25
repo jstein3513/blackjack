@@ -45,25 +45,21 @@ document.addEventListener('DOMContentLoaded', () => {
         gameStatusDiv.textContent = '';
     }
 
-async function hit() {
+function hit() {
     if (!inGame || playerTurnOver) return;
     playerCards.push(deck.pop());
+    const playerScore = calculateScore(playerCards);
     updateGameArea(); // Update UI to show the latest card
 
-    const playerScore = calculateScore(playerCards);
-
     if (playerScore > 21) {
+        gameStatusDiv.textContent = 'Bust!'; // Update game status immediately
+        playerTurnOver = true; // Player busts
         setTimeout(() => {
-            gameStatusDiv.textContent = 'Bust!'; // Display bust message after a short delay
-            setTimeout(() => {
-                playerTurnOver = true; // Player busts
-                stand(); // Proceed with the end of the player's turn
-            }, 1000); // Delay before ending the player's turn
-        }, 500); // Short delay before displaying the bust message
+            stand(); // Proceed with the end of the player's turn after a short delay
+        }, 1000); // Delay before ending the player's turn
     }
-
-    await new Promise(resolve => setTimeout(resolve, 100)); // Wait for a short delay
 }
+
 
 
     function stand() {
