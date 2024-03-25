@@ -45,11 +45,12 @@ document.addEventListener('DOMContentLoaded', () => {
         gameStatusDiv.textContent = '';
     }
 
-function hit() {
+async function hit() {
     if (!inGame || playerTurnOver) return;
     playerCards.push(deck.pop());
-    const playerScore = calculateScore(playerCards);
     updateGameArea(); // Update UI to show the latest card
+
+    const playerScore = calculateScore(playerCards);
 
     if (playerScore > 21) {
         setTimeout(() => {
@@ -60,7 +61,10 @@ function hit() {
             }, 1000); // Delay before ending the player's turn
         }, 500); // Short delay before displaying the bust message
     }
+
+    await new Promise(resolve => setTimeout(resolve, 100)); // Wait for a short delay
 }
+
 
     function stand() {
         if (!inGame || playerTurnOver) return;
