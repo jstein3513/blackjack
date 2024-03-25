@@ -31,19 +31,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function startGame() {
-        deck = createDeck();
-        shuffleDeck(deck);
-        dealerCards = [deck.pop(), deck.pop()];
-        playerCards = [deck.pop(), deck.pop()];
-        inGame = true;
-        playerTurnOver = false;
-        document.getElementById('dealerHeader').classList.remove('hidden');
-        document.getElementById('playerHeader').classList.remove('hidden');
-        updateGameArea();
-        dealerActionDiv.textContent = '';
-        gameStatusDiv.textContent = '';
-    }
+function startGame() {
+    deck = createDeck();
+    shuffleDeck(deck);
+    dealerCards = [deck.pop(), deck.pop()];
+    playerCards = [deck.pop(), deck.pop()];
+    inGame = true; // Ensure game state is set to indicate that a game is currently in progress
+    playerTurnOver = false; // Ensure player turn is not marked as over at the start of the game
+    document.getElementById('dealerHeader').classList.remove('hidden');
+    document.getElementById('playerHeader').classList.remove('hidden');
+    updateGameArea();
+    dealerActionDiv.textContent = '';
+    gameStatusDiv.textContent = '';
+
+    // Ensure the "Hit" and "Stand" buttons are enabled at the start of the game
+    hitButton.disabled = false;
+    standButton.disabled = false;
+}
+
 
 function hit() {
     if (!inGame || playerTurnOver) return;
