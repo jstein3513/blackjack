@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Add viewport meta tag for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Blackjack Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container"> <!-- Wrap the entire content in a container for better mobile layout -->
-<h1>Blackjack <span id="scoreboard">Wins: 0 | Losses: 0</span></h1>
+    <div class="container">
+        <h1>Blackjack</h1>
         <div id="gameArea">
             <div id="dealerArea">
                 <h2 id="dealerHeader" class="hidden">Dealer's Hand</h2>
@@ -19,6 +19,7 @@
                 <div id="playerCards"></div>
             </div>
             <div id="gameStatus"></div>
+            <div id="scoreboard" style="text-align: center; color: white; margin-bottom: 10px;">Wins: 0 | Losses: 0</div>
             <div class="button-container">
                 <button id="startGame">Start Game</button>
                 <button id="hit">Hit</button>
