@@ -117,33 +117,31 @@ h1, h2 {
 
 
 /* Add media query for mobile devices */
-@media screen and (max-width: 600px) { /* Adjust the max-width as needed */
+@media screen and (max-width: 600px) {
     .container {
         padding: 10px; /* Adjust padding for smaller screens */
     }
     button {
-        width: 100px; /* Adjust button width for better touch interaction */
+        width: 100%; /* Make buttons fill the container width */
+        margin: 10px auto; /* Center buttons and add margin */
     }
-    #gameArea {
-        font-size: 14px; /* Adjust font size for smaller screens */
+    .button-container {
+        position: static; /* Revert to static positioning for mobile */
+        transform: none; /* Remove transform */
+        display: flex;
+        flex-direction: column; /* Arrange children in a column */
+        align-items: center; /* Center-align the flex items */
+        gap: 10px; /* Add spacing between buttons and scoreboard */
     }
     .card {
         width: 50px; /* Adjust card width for smaller screens */
         height: 88px; /* Adjust card height for smaller screens */
     }
-    .card .suit {
-        font-size: 14px; /* Adjust font size for suit symbol */
+    .card .suit, .card .value {
+        font-size: 14px; /* Adjust font size for suit symbol and card value */
     }
-    .card .value {
-        font-size: 14px; /* Adjust font size for card value */
-    }
-    .button-container {
-        position: absolute;
-        bottom: 70px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex; /* Set display to flex */
-        justify-content: center; /* Center the buttons horizontally */
-        gap: 10px; /* Add spacing between buttons */
+    #scoreboard {
+        width: auto; /* Adjust width to auto to fit content width */
+        margin: 10px 0; /* Adjust margin to ensure spacing around the scoreboard */
     }
 }
