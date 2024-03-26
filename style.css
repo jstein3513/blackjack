@@ -142,8 +142,9 @@ h1, h2 {
         bottom: 70px;
         left: 50%;
         transform: translateX(-50%);
-        display: flex; /* Set display to flex */
-        justify-content: center; /* Center the buttons horizontally */
-        gap: 10px; /* Add spacing between buttons */
+        display: flex; /* Keeps it as flex. */
+        flex-direction: column; /* Stacks items vertically. */
+        align-items: center; /* Aligns items in the center horizontally. */
+        width: auto; /* Adjusts the width to fit its content. */
     }
 }
