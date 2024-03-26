@@ -145,6 +145,8 @@ h1, h2 {
         order: 4; /* Ensure scoreboard is placed below the buttons */
         width: 100%; /* Scoreboard takes full width to center text properly */
         margin-top: 20px; /* Space above the scoreboard */
+        padding-right: 10px
+        padding-left: 10px
         text-align: center; /* Center-align scoreboard text */
         font-size: 16px; /* Adjust font size as needed */
         padding: 10px 0; /* Padding above and below the scoreboard text */
