@@ -60,6 +60,8 @@ function hit() {
 
     if (playerScore > 21) {
         gameStatusDiv.textContent = 'Bust!'; // Update game status immediately
+       losses++;
+      document.getElementById('scoreboard').textContent = `Wins: ${wins} | Losses: ${losses}`;
         playerTurnOver = true; // Player busts
         setTimeout(() => {
             stand(); // Proceed with the end of the player's turn after a short delay
