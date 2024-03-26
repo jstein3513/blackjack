@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let playerCards = [], dealerCards = [], deck = [];
     let inGame = false, playerTurnOver = false;
+let wins = 0;
+let losses = 0;
 
     function createDeck() {
         const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
@@ -88,19 +90,28 @@ function hit() {
         endGame();
     }
 
-    function endGame() {
-        inGame = false;
-        const playerScore = calculateScore(playerCards);
-        const dealerScore = calculateScore(dealerCards);
-        if (playerScore > 21) {
-            gameStatusDiv.textContent += ' You bust! Dealer wins.';
-        } else if (dealerScore > 21 || playerScore > dealerScore) {
-            gameStatusDiv.textContent += ' You win!';
-        } else if (dealerScore > playerScore) {
-            gameStatusDiv.textContent += ' Dealer wins.';
-        } else {
-            gameStatusDiv.textContent += ' Draw!';
-        }
+function endGame() {
+    inGame = false;
+    const playerScore = calculateScore(playerCards);
+    const dealerScore = calculateScore(dealerCards);
+
+    // Determine outcome and update counts
+    if (playerScore > 21) {
+        gameStatusDiv.textContent += ' You bust! Dealer wins.';
+        losses++;
+    } else if (dealerScore > 21 || playerScore > dealerScore) {
+        gameStatusDiv.textContent += ' You win!';
+        wins++;
+    } else if (dealerScore > playerScore) {
+        gameStatusDiv.textContent += ' Dealer wins.';
+        losses++;
+    } else {
+        gameStatusDiv.textContent += ' Draw!';
+        // Draws do not count towards wins or losses
+    }
+
+    // Update the scoreboard
+    document.getElementById('scoreboard').textContent = `Wins: ${wins} | Losses: ${losses}`;
 
         // Reveal dealer's hidden card
         if (dealerCards.length > 0) {
