@@ -117,12 +117,13 @@ h1, h2 {
 
 
 /* Add media query for mobile devices */
-@media screen and (max-width: 600px) { /* Adjust the max-width as needed */
+@media screen and (max-width: 600px) {
     .container {
         padding: 10px; /* Adjust padding for smaller screens */
     }
     button {
         width: 100px; /* Adjust button width for better touch interaction */
+        /* Remove margin: 10px; from the general button style if it causes layout issues */
     }
     #gameArea {
         font-size: 14px; /* Adjust font size for smaller screens */
@@ -131,20 +132,28 @@ h1, h2 {
         width: 50px; /* Adjust card width for smaller screens */
         height: 88px; /* Adjust card height for smaller screens */
     }
-    .card .suit {
-        font-size: 14px; /* Adjust font size for suit symbol */
-    }
-    .card .value {
-        font-size: 14px; /* Adjust font size for card value */
+    .card .suit, .card .value {
+        font-size: 14px; /* Adjust font size for suit symbol and card value */
     }
     .button-container {
-        position: absolute;
-        bottom: 70px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex; /* Keeps it as flex. */
-        flex-direction: column; /* Stacks items vertically. */
-        align-items: center; /* Aligns items in the center horizontally. */
-        width: auto; /* Adjusts the width to fit its content. */
+        position: relative; /* Adjust if necessary, consider switching from absolute to ensure layout consistency */
+        bottom: auto;
+        left: auto;
+        transform: none;
+        display: flex; /* Use flexbox for layout */
+        flex-direction: row; /* Align items horizontally */
+        justify-content: center; /* Center the items horizontally */
+        gap: 10px; /* Add spacing between buttons */
+        flex-wrap: wrap; /* Ensure elements wrap as needed */
+        align-items: center; /* Align items vertically in the center */
+        width: 100%; /* Use full width to accommodate inner content */
+        margin: 0 auto 20px; /* Ensure some space at the bottom */
+    }
+
+    #scoreboard {
+        order: 3; /* Ensure scoreboard is positioned after the buttons */
+        width: 100%; /* Ensure scoreboard takes full width of its container */
+        margin-top: 20px; /* Add some space above the scoreboard */
+        font-size: 16px; /* Adjust font size as needed */
     }
 }
