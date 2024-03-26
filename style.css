@@ -121,9 +121,12 @@ h1, h2 {
     .container {
         padding: 10px; /* Adjust padding for smaller screens */
     }
+
     button {
-        width: 100px; /* Adjust button width for better touch interaction */
-        /* Remove margin: 10px; from the general button style if it causes layout issues */
+        width: 90px; /* Adjust button width for smaller screens, consider reducing if buttons don't fit */
+        padding: 10px;
+        margin: 0; /* Reset any default margin to prevent offsets */
+        font-size: 14px; /* Adjust font size for readability */
     }
     #gameArea {
         font-size: 14px; /* Adjust font size for smaller screens */
@@ -136,24 +139,20 @@ h1, h2 {
         font-size: 14px; /* Adjust font size for suit symbol and card value */
     }
     .button-container {
-        position: relative; /* Adjust if necessary, consider switching from absolute to ensure layout consistency */
-        bottom: auto;
-        left: auto;
-        transform: none;
+        position: relative; /* Adjust position as needed */
         display: flex; /* Use flexbox for layout */
         flex-direction: row; /* Align items horizontally */
         justify-content: center; /* Center the items horizontally */
-        gap: 10px; /* Add spacing between buttons */
-        flex-wrap: wrap; /* Ensure elements wrap as needed */
         align-items: center; /* Align items vertically in the center */
-        width: 100%; /* Use full width to accommodate inner content */
-        margin: 0 auto 20px; /* Ensure some space at the bottom */
+        gap: 10px; /* Add spacing between buttons */
+        width: 100%; /* Adjust width to container */
+        margin: 20px 0; /* Add top and bottom margin for spacing */
     }
 
     #scoreboard {
-        order: 3; /* Ensure scoreboard is positioned after the buttons */
-        width: 100%; /* Ensure scoreboard takes full width of its container */
-        margin-top: 20px; /* Add some space above the scoreboard */
-        font-size: 16px; /* Adjust font size as needed */
+        width: 100%; /* Ensure scoreboard takes full width */
+        margin-top: 10px; /* Adjust top margin for spacing after buttons */
+        font-size: 16px; /* Optional: Adjust font size for scoreboard readability */
+        text-align: center; /* Ensure scoreboard text is centered */
     }
 }
