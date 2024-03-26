@@ -67,7 +67,7 @@ button:hover {
     margin-top: 20px;
     font-size: 24px;
     color: #fff;
-    min-height: 20px; /* Sets a minimum height for the game status area */
+    min-height: 25px; /* Sets a minimum height for the game status area */
 }
 
 /* Additional styles to center the game area */
