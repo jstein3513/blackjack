@@ -65,7 +65,7 @@ button:hover {
 
 #gameStatus {
     margin-top: 20px;
-    padding-bottom: 10px
+    padding-bottom: 20px
     font-size: 24px;
     color: #fff;
 }
@@ -79,8 +79,8 @@ button:hover {
 }
 
 .header {
-    padding-top: 40px;
-    padding-bottom: 15px;
+    padding-top: 20px; //was 40px
+    padding-bottom: 10px; //was 15px
 }
 
 h1, h2 {
