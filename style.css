@@ -65,7 +65,6 @@ button:hover {
 
 #gameStatus {
     margin-top: 20px;
-    padding-bottom: 10px
     font-size: 24px;
     color: #fff;
 }
@@ -141,6 +140,7 @@ h1, h2 {
     flex-wrap: wrap; /* Allow items to wrap as needed */
     justify-content: center; /* Center items horizontally */
     width: 100%; /* Ensure container takes full width */
+    padding-top: 10px
 }
 #scoreboard {
     display: inline-block; /* Make width content-dependent */
