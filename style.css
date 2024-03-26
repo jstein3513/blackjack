@@ -105,10 +105,15 @@ h1, h2 {
 }
 
 #scoreboard {
-    float: right;
-    color: white;
-    font-size: small; /* Adjust as needed */
+    color: white; /* Ensure the text is white for visibility */
+    font-size: 18px; /* Adjust font size as needed */
+    padding: 10px; /* Add some padding above and below the scoreboard */
+    background-color: rgba(0,0,0,0.5); /* Optional: Adds a semi-transparent background */
+    border-radius: 5px; /* Optional: Rounds the corners of the background */
+    margin: 20px auto; /* Centers the scoreboard and adds margin above it */
+    width: fit-content; /* Ensures the background only extends as far as the content */
 }
+
 
 
 /* Add media query for mobile devices */
