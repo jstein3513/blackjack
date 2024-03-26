@@ -134,12 +134,13 @@ h1, h2 {
     .card .suit, .card .value {
         font-size: 14px; /* Adjust font size for suit symbol and card value */
     }
-    .button-container {
-        display: flex; /* Use flexbox for layout */
-        flex-direction: column; /* Stack elements vertically */
-        align-items: center; /* Center-align items */
-        gap: 10px; /* Space between elements */
-    }
+.button-container {
+    display: flex;
+    flex-direction: row; /* Keep items in a row for horizontal alignment */
+    flex-wrap: wrap; /* Allow items to wrap as needed */
+    justify-content: center; /* Center items horizontally */
+    width: 100%; /* Ensure container takes full width */
+}
     #scoreboard {
         order: 4; /* Ensure scoreboard is placed below the buttons */
         width: 100%; /* Scoreboard takes full width to center text properly */
