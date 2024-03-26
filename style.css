@@ -141,14 +141,15 @@ h1, h2 {
     justify-content: center; /* Center items horizontally */
     width: 100%; /* Ensure container takes full width */
 }
-    #scoreboard {
-        order: 4; /* Ensure scoreboard is placed below the buttons */
-        width: 100%; /* Scoreboard takes full width to center text properly */
-        margin-top: 20px; /* Space above the scoreboard */
-        padding-right: 50px
-        padding-left: 50px
-        text-align: center; /* Center-align scoreboard text */
-        font-size: 16px; /* Adjust font size as needed */
-        padding: 10px 0; /* Padding above and below the scoreboard text */
-    }
+#scoreboard {
+    display: inline-block; /* Make width content-dependent */
+    padding: 10px 20px; /* Add some padding around the content */
+    color: white; /* Keep the text color white */
+    font-size: 16px; /* Adjust font size as needed */
+    background-color: rgba(0,0,0,0.5); /* Keep your semi-transparent background */
+    border-radius: 5px; /* Rounds the corners of the background */
+    margin-top: 20px; /* Add space above the scoreboard */
+    text-align: center; /* Ensure text is centered */
+}
+
 }
