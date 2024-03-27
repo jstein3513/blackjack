@@ -38,25 +38,31 @@ button:hover {
     background-color: #fff;
     border-radius: 12px;
     border: 1px solid #000;
-    width: 60px;
-    height: 100px;
+    width: 60px; /* Adjust width as necessary */
+    height: 100px; /* Adjust height as necessary */
     position: relative;
-    font-size: 18px;
+    font-size: 18px; /* Base font size for the card */
     color: black;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: all 2.5s ease; /* Add transition for fluid motion */
+    transition: all 2.5s ease;
 }
 
 .card .suit {
     position: absolute;
-    top: 5px;
-    left: 5px;
+    bottom: 5px;
+    right: 5px;
+    font-size: 24px; /* Larger size for the suit */
+}
+
+.card .suit, .card .value {
+    font-family: 'Luckiest Guy', cursive; /* Applying Luckiest Guy font */
 }
 
 .card .value {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
+    top: 5px;
+    left: 5px;
+    font-size: 24px; /* Larger and more playful for the number */
 }
 
 .card.hearts, .card.diamonds {
