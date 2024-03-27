@@ -49,8 +49,8 @@ button:hover {
 
 .card .suit {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 8px;
+    right: 8px;
     font-size: 24px; /* Larger size for the suit */
 }
 
@@ -60,9 +60,9 @@ button:hover {
 
 .card .value {
     position: absolute;
-    top: 5px;
-    left: 5px;
-    font-size: 24px; /* Larger and more playful for the number */
+    top: 8px;
+    left: 8px;
+    font-size: 30px; /* Larger and more playful for the number */
 }
 
 .card.hearts, .card.diamonds {
@@ -141,7 +141,7 @@ h1, h2 {
         height: 88px; /* Adjust card height for smaller screens */
     }
     .card .suit, .card .value {
-        font-size: 20px; /* Adjust font size for suit symbol and card value */
+        font-size: 25px; /* Adjust font size for suit symbol and card value */
     }
 .button-container {
     display: flex;
