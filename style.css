@@ -49,8 +49,8 @@ button:hover {
 
 .card .suit {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
+    bottom: 10px;
+    right: 10px;
     font-size: 24px; /* Larger size for the suit */
 }
 
@@ -139,7 +139,7 @@ h1, h2 {
         height: 88px; /* Adjust card height for smaller screens */
     }
     .card .suit, .card .value {
-        font-size: 14px; /* Adjust font size for suit symbol and card value */
+        font-size: 20px; /* Adjust font size for suit symbol and card value */
     }
 .button-container {
     display: flex;
