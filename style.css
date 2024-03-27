@@ -1,5 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
+    //font-family: Arial, sans-serif;
+    font-family: 'Luckiest Guy', cursive; /* Applying Luckiest Guy font */
     text-align: center;
     margin: 0;
     padding: 0;
@@ -24,6 +25,8 @@ button {
     font-weight: 600; /* Make the text bold */
     color: black; /* Set text color to black */
     font-size: 14px; /* Set the font size to 16 pixels (adjust as needed) */
+    font-family: 'Luckiest Guy', cursive; /* Applying Luckiest Guy font */
+
 }
 
 
