@@ -1,6 +1,6 @@
 body {
     //font-family: Arial, sans-serif;
-    font-family: 'Permanent Marker'; /* Applying Luckiest Guy font */
+    font-family: 'Luckeist Guy'; /* Applying Luckiest Guy font */
     text-align: center;
     margin: 0;
     padding: 0;
@@ -22,10 +22,10 @@ button {
     cursor: pointer;
     transition: all 0.3s ease;
     width: 150px;
-    font-weight: 600; /* Make the text bold */
+    font-weight: 400; /* Make the text bold */
     color: black; /* Set text color to black */
-    font-size: 14px; /* Set the font size to 16 pixels (adjust as needed) */
-    font-family: 'Permanent Marker', cursive; /* Applying Luckiest Guy font */
+    font-size: 18px; /* Set the font size to 16 pixels (adjust as needed) */
+    font-family: 'Luckiest Guy', cursive; /* Applying Luckiest Guy font */
 
 }
 
