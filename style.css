@@ -102,6 +102,8 @@ h1, h2 {
     color: white;
     text-align: center;
     line-height: 100px; /* Center the '?' vertically */
+    font-family: 'Luckiest Guy', cursive; /* Applying Luckiest Guy font */
+
 }
 
 #dealerCards {
