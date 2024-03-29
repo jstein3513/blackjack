@@ -8,11 +8,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameArea = document.getElementById('gameArea');
     const dealerActionDiv = document.createElement('div');
     dealerActionDiv.setAttribute('id', 'dealerAction');
-
+    displayCardBacks();
+   
     let playerCards = [], dealerCards = [], deck = [];
     let inGame = false, playerTurnOver = false;
 let wins = 0;
 let losses = 0;
+   
+   function displayCardBacks() {
+    // Clear any existing cards
+    dealerCardsDiv.innerHTML = '';
+    playerCardsDiv.innerHTML = '';
+
+    // Create two card backs for the dealer and two for the player
+    for (let i = 0; i < 2; i++) {
+        dealerCardsDiv.appendChild(createCardBack());
+        playerCardsDiv.appendChild(createCardBack());
+    }
+}
+
+function createCardBack() {
+    const cardBackDiv = document.createElement('div');
+    cardBackDiv.classList.add('card', 'back');
+    cardBackDiv.textContent = '?'; // Or you could use an image or any design you prefer for the back
+    return cardBackDiv;
+}
+   
 
     function createDeck() {
         const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
