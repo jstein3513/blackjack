@@ -101,14 +101,39 @@ h1, h2 {
     display: none;
 }
 
-.card .back {
-    background-color: blue;
-    color: white;
-    text-align: center;
-    line-height: 150px; /* Center the '?' vertically */
-    font-family: 'Luckiest Guy', cursive; /* Applying Luckiest Guy font */
-
+.card.back {
+    background-color: white;
+    position: relative;
+    width: 60px; /* Adjust as necessary */
+    height: 100px; /* Adjust as necessary */
+    border-radius: 8px; /* Rounded corners for the card */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Optional: Adds some depth */
 }
+
+.card.back::before {
+    content: '';
+    position: absolute;
+    top: 8px; /* Distance from outer edge */
+    left: 8px; /* Distance from outer edge */
+    right: 8px; /* Distance from outer edge */
+    bottom: 8px; /* Distance from outer edge */
+    border: 1px solid #000; /* Border for the rectangle */
+       border-radius: 6px; /* Rounded corners for the card */
+
+    z-index: 1;
+}
+
+.card.back::after {
+    content: '';
+    position: absolute;
+    top: 8.5px;
+    left: 9px;
+    right: 9px;
+    bottom: 8.5px;
+    background-image: repeating-linear-gradient(45deg, #000 0, #000 1px, #fff 1px, #fff 5%); /* Diagonal lines */
+    z-index: 0;
+}
+
 
 #dealerCards {
     display: flex;
