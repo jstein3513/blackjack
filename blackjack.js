@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let inGame = false, playerTurnOver = false;
 let wins = 0;
 let losses = 0;
+   let bustTimeout = null;
    
    function displayCardBacks() {
     // Clear any existing cards
@@ -55,6 +56,11 @@ function createCardBack() {
     }
 
 function startGame() {
+       if (bustTimeout !== null) {
+        clearTimeout(bustTimeout);
+        bustTimeout = null;
+    }
+   
     deck = createDeck();
     shuffleDeck(deck);
     dealerCards = [deck.pop(), deck.pop()];
@@ -79,15 +85,17 @@ function hit() {
     const playerScore = calculateScore(playerCards);
     updateGameArea(); // Update UI to show the latest card
 
-    if (playerScore > 21) {
-        gameStatusDiv.textContent = 'Bust!'; // Update game status immediately
-       losses++;
-      document.getElementById('scoreboard').textContent = `Wins: ${wins} | Losses: ${losses}`;
-        playerTurnOver = true; // Player busts
-        setTimeout(() => {
-            stand(); // Proceed with the end of the player's turn after a short delay
-        }, 1000); // Delay before ending the player's turn
-    }
+if (playerScore > 21) {
+    gameStatusDiv.textContent = 'Bust!';
+    losses++;
+    document.getElementById('scoreboard').textContent = `Wins: ${wins} | Losses: ${losses}`;
+    playerTurnOver = true;
+    // Store the timeout ID so it can be cleared if a new game starts
+    bustTimeout = setTimeout(() => {
+        stand();
+    }, 1000);
+}
+
 }
 
 
