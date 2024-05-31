@@ -3,43 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Blackjack Game</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Permanent+Marker&display=swap" rel="stylesheet">
-    
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BH0EZN9GV9"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-BH0EZN9GV9');
-    </script>
+    <title>Car Search</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Blackjack</h1>
-        <div id="gameArea">
-            <div id="dealerArea">
-                <!-- Removed the 'hidden' class -->
-                <h2 id="dealerHeader">Dealer's Hand</h2>
-                <div id="dealerCards"></div>
-            </div>
-            <div id="playerArea">
-                <!-- Removed the 'hidden' class -->
-                <h2 id="playerHeader">Your Hand</h2>
-                <div id="playerCards"></div>
-            </div>
-            <div id="gameStatus"></div>
-            <div class="button-container">
-                <button id="startGame">Start Game</button>
-                <button id="hit">Hit</button>
-                <button id="stand">Stand</button>
-                <div id="scoreboard" style="color: white; margin-top: 10px;">Wins: 0 | Losses: 0</div>
-            </div>
-        </div>
-    </div>
-    <script src="blackjack.js"></script>
+    <h1>Car Search</h1>
+    <input type="text" id="searchQuery" placeholder="Enter car details...">
+    <button onclick="searchCars()">Search</button>
+    <div id="results"></div>
+
+    <script src="app.js"></script>
 </body>
 </html>
